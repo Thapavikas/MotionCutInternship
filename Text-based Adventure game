@@ -1,0 +1,89 @@
+import time
+import random
+
+def introduction():
+    print("Welcome to the Mysterious Forest Adventure!")
+    print("You find yourself standing at the edge of a mysterious forest.")
+    print("Legend has it that deep within the forest lies a hidden treasure.")
+    print("Your goal is to navigate through the forest and uncover the treasure.")
+    print("Be cautious, as your choices will determine your fate.")
+    print("\nLet the adventure begin!\n")
+
+def make_choice(choices):
+    print("Choose your path:")
+    for i, choice in enumerate(choices, start=1):
+        print(f"{i}. {choice}")
+
+    while True:
+        try:
+            choice_num = int(input("Enter the number of your choice: "))
+            if 1 <= choice_num <= len(choices):
+                return choice_num
+            else:
+                print("Invalid choice. Please enter a valid number.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def explore_forest():
+    print("\nYou enter the forest and come across a fork in the path.")
+    choices = ["Take the left path.", "Take the right path."]
+    choice = make_choice(choices)
+
+    if choice == 1:
+        print("\nYou follow the left path and discover a magical pond.")
+        print("The pond is said to reveal glimpses of the future.")
+        choices = ["Drink from the pond.", "Continue on the path without drinking."]
+        choice = make_choice(choices)
+
+        if choice == 1:
+            print("\nThe water grants you visions of hidden traps ahead. You avoid danger.")
+        else:
+            print("\nYou continue on the path but fall into a concealed pit. Luckily, you survive.")
+    else:
+        print("\nYou take the right path and encounter a group of friendly forest creatures.")
+        print("They offer to guide you deeper into the forest.")
+        choices = ["Accept their guidance.", "Politely decline and continue on your own."]
+        choice = make_choice(choices)
+
+        if choice == 1:
+            print("\nThe creatures lead you safely through the forest, avoiding potential dangers.")
+        else:
+            print("\nYou decide to go on your own and get lost in the dense woods. Eventually, you find your way.")
+
+def discover_cave():
+    print("\nWhile exploring, you discover a hidden cave.")
+    print("It is said that the treasure might be hidden inside.")
+    choices = ["Enter the cave.", "Ignore the cave and continue exploring."]
+    choice = make_choice(choices)
+
+    if choice == 1:
+        print("\nInside the cave, you find a chest filled with gold and jewels.")
+        print("Congratulations! You've found the hidden treasure.")
+        return True
+    else:
+        print("\nYou decide to continue exploring the forest, bypassing the cave.")
+
+def main():
+    introduction()
+
+    # Starting point: Explore the forest
+    explore_forest()
+
+    # Player progress flag
+    found_treasure = False
+
+    # Continue the adventure
+    while not found_treasure:
+        choices = ["Continue exploring the forest.", "Enter the cave."]
+        choice = make_choice(choices)
+
+        if choice == 1:
+            explore_forest()
+        else:
+            found_treasure = discover_cave()
+
+    print("\nThank you for playing the Mysterious Forest Adventure!")
+    print("Your journey has come to an end.")
+
+if __name__ == "__main__":
+    main()
